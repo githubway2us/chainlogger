@@ -443,10 +443,24 @@ class WalletApp:
         
         # Bind a click event on the Listbox to show block details
         self.blockchain_listbox.bind("<ButtonRelease-1>", self.show_block_details)
+        
     def open_time_capsule(self):
-        # เปิดเว็บที่ 127.0.0.1:3000 ในหน้าต่างใหม่ของโปรแกรม ขนาด 700x800
-        webview.create_window('Upload :: Time Capsule', 'http://127.0.0.1', width=450, height=800)  # กำหนดขนาด
-        webview.start()  # เริ่มการแสดงผล
+        try:
+            # Check connection to MainServer
+            response = requests.get('http://127.0.0.1')
+            if response.status_code == 200:
+                # If connection is successful, open the web page
+                webview.create_window('Upload :: Time Capsule', 'http://127.0.0.1', width=450, height=800)
+                webview.start()  # Start displaying the web page
+            else:
+                # If the server status is incorrect, show the error message in a new window
+                webview.create_window('Error', 'data:text/html,<html><body><h2>Your system is not yet connected to the MainServer</h2></body></html>', width=450, height=200)
+                webview.start()  # Start displaying the error window
+        except requests.exceptions.RequestException:
+            # If connection to the server fails, show the error message in a new window
+            webview.create_window('Error', 'data:text/html,<html><body><h2>Your system is not yet connected to the MainServer</h2></body></html>', width=450, height=200)
+            webview.start()  # Start displaying the error window
+            
     def search_block(self):
             search_query = self.search_entry.get().lower()
             self.blockchain_listbox.delete(0, tk.END)
