@@ -1,0 +1,9 @@
+sqlite3==3.35.4
+hashlib==0.0.0
+uuid==1.30
+tkinter==8.6
+pyperclip==1.8.2
+cryptography==38.0.1
+requests==2.28.1
+Pillow==9.3.0
+pywebview==4.1
