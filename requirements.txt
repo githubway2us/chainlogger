@@ -4,4 +4,4 @@ python-dotenv==1.0.0
 requests==2.31.0
 bleach==6.1.0
 Pillow==11.3.0
-gunicorn
+gunicorn==23.0.0
