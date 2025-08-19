@@ -41,7 +41,7 @@ class Blockchain:
             self.create_genesis_block()
 
     def create_table(self):
-        conn = psycopg2.connect(**DB_CONFIG)
+        conn = psycopg.connect(**DB_CONFIG)
         cursor = conn.cursor()
         
         cursor.execute('''
